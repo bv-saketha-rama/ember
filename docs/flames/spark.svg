@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 150" width="120" height="150" role="img" aria-label="Spark flame">
+  <defs>
+    <radialGradient id="glow-spark" cx="50%" cy="60%" r="55%">
+      <stop offset="0%" stop-color="#FF6B35" stop-opacity="0.35"/>
+      <stop offset="62%" stop-color="#FF6B35" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body-spark" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="55%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="rgb(255, 203, 184)" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="core-spark" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="rgb(255, 203, 184)" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+    </linearGradient></defs><ellipse cx="60" cy="95" rx="58" ry="64" fill="url(#glow-spark)"/><g transform="translate(10 6) scale(1)">
+       <g transform="translate(50 128) scale(0.55) translate(-50 -128)"><path d="M50 6 C 69 38, 88 60, 88 90 C 88 118, 71 134, 50 134 C 29 134, 12 118, 12 90 C 12 60, 31 38, 50 6 Z" fill="url(#body-spark)"/>
+            <path d="M50 40 C 62 62, 71 74, 71 95 C 71 115, 62 123, 50 123 C 38 123, 29 115, 29 95 C 29 74, 38 62, 50 40 Z" fill="url(#core-spark)" opacity="0.85"/></g>
+     </g>
+</svg>

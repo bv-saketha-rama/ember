@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 150" width="120" height="150" role="img" aria-label="Blaze flame">
+  <defs>
+    <radialGradient id="glow-blaze" cx="50%" cy="60%" r="55%">
+      <stop offset="0%" stop-color="#8338EC" stop-opacity="0.7"/>
+      <stop offset="62%" stop-color="#8338EC" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body-blaze" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#8338EC"/>
+      <stop offset="55%" stop-color="#8338EC"/>
+      <stop offset="100%" stop-color="rgb(212, 185, 248)" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="core-blaze" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="rgb(212, 185, 248)" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+    </linearGradient></defs><ellipse cx="60" cy="95" rx="58" ry="64" fill="url(#glow-blaze)"/><g transform="translate(10 6) scale(1)">
+       <g transform="translate(50 128) scale(1.12) translate(-50 -128)"><path d="M50 6 C 69 38, 88 60, 88 90 C 88 118, 71 134, 50 134 C 29 134, 12 118, 12 90 C 12 60, 31 38, 50 6 Z" fill="url(#body-blaze)"/>
+            <path d="M50 40 C 62 62, 71 74, 71 95 C 71 115, 62 123, 50 123 C 38 123, 29 115, 29 95 C 29 74, 38 62, 50 40 Z" fill="url(#core-blaze)" opacity="0.85"/></g>
+     </g>
+</svg>
