@@ -1,0 +1,22 @@
+{
+  "name": "ember-remotion-demo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Remotion walkthrough for Ember",
+  "scripts": {
+    "render": "remotion render src/index.ts Walkthrough out/ember-walkthrough.mp4 --codec=h264",
+    "gif": "remotion render src/index.ts Walkthrough out/ember-walkthrough.gif --codec=gif --every-nth-frame=2 --width=960",
+    "still": "remotion still src/index.ts Walkthrough out/poster.png --frame=210",
+    "studio": "remotion studio src/index.ts"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "typescript": "^5.4.0"
+  }
+}

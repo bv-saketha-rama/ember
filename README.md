@@ -8,6 +8,14 @@
 
 <img src="docs/flames/stages.svg" alt="The five flame stages: Spark, Flame, Blaze, Beacon, Phoenix" width="100%" />
 
+**[🔴 Live demo → ember-two-sigma.vercel.app](https://ember-two-sigma.vercel.app)**
+
+<br/>
+
+<a href="https://ember-two-sigma.vercel.app"><img src="docs/demo/ember-walkthrough.gif" alt="Ember walkthrough — a flame growing from Spark to Phoenix, dimming with grace, and braiding with others" width="90%" /></a>
+
+<sub>▶️ <a href="docs/demo/ember-walkthrough.mp4">Watch the full-quality walkthrough (MP4)</a></sub>
+
 *Built for the [Weekend Challenge: Passion Edition](https://dev.to/challenges/weekend-2026-07-09).*
 
 </div>
@@ -118,7 +126,7 @@ tests/                  Vitest specs for dates + stages
 ### 1. Install
 
 ```bash
-git clone <your-repo-url> ember
+git clone https://github.com/bv-saketha-rama/ember.git
 cd ember
 npm install
 ```

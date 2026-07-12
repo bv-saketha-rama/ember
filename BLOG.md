@@ -2,7 +2,7 @@
 
 ## What I Built
 
-**[Ember](https://github.com/your-username/ember) — tend the things you're building, and watch them burn.** 🔥
+**[Ember](https://github.com/bv-saketha-rama/ember) — tend the things you're building, and watch them burn.** 🔥
 
 Every habit tracker I've used treats a missed day like a moral failure: your streak snaps back to zero and you feel bad enough to quit. That never matched how *passions* actually work. They don't die when you skip a Tuesday — they smoulder, and wait.
 
@@ -18,9 +18,9 @@ To make it feel personal rather than mechanical, the onboarding is a short *conv
 
 <!-- ▶️ DEMO SLOT: live link + walkthrough GIF/video go here -->
 
-**🔗 Live app:** _<deploy URL — coming from Vercel>_
+**🔗 Live app:** **https://ember-two-sigma.vercel.app**
 
-**🎥 Walkthrough:** _<demo GIF/video embed>_
+![Ember walkthrough — a flame growing from Spark to Phoenix, dimming with grace, and braiding with others](https://raw.githubusercontent.com/bv-saketha-rama/ember/main/docs/demo/ember-walkthrough.gif)
 
 A quick tour of the flow:
 1. **Land** on a branded page and sign in — Clerk auth is embedded right in the app (email or Google), no redirect to a hosted portal.
@@ -30,7 +30,7 @@ A quick tour of the flow:
 
 ## Code
 
-{% embed https://github.com/your-username/ember %}
+{% embed https://github.com/bv-saketha-rama/ember %}
 
 The whole thing is open source. A few files worth a look:
 - [`convex/stages.ts`](convex/stages.ts) — the pure, unit-tested flame mechanics (stage thresholds, consistency score, grace/decay).
