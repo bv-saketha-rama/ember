@@ -1,11 +1,53 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { Show, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { Flame } from "@/components/flame/Flame";
+import { AiBadge } from "@/components/ui/AiThinking";
 import { FLAME_COLORS, type Stage } from "@/lib/palette";
+
+// The interactive Remotion walkthrough is browser-only (canvas/timing APIs), so
+// load it lazily and skip it during SSR.
+const DemoPlayer = dynamic(
+  () => import("@/components/landing/DemoPlayer").then((m) => m.DemoPlayer),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex aspect-video w-full items-center justify-center rounded-2xl border border-border bg-surface/60 text-sm text-text-muted">
+        Loading walkthrough…
+      </div>
+    ),
+  },
+);
+
+// The four things a new user does, mirrored by the interactive demo above.
+const STEPS: { n: string; title: string; body: string; ai?: boolean }[] = [
+  {
+    n: "01",
+    title: "Light a flame",
+    body: "Name a passion you want to tend and pick its color. Ember AI then asks you three short questions about your why — so the flame carries your story.",
+    ai: true,
+  },
+  {
+    n: "02",
+    title: "Check in daily",
+    body: "One tap on a mood is enough. Want to go deeper? Ember AI writes you a personal check-in question based on this flame — always optional, never a gate.",
+    ai: true,
+  },
+  {
+    n: "03",
+    title: "Watch it grow",
+    body: "Every day you show up, the flame climbs through five stages — Spark, Flame, Blaze, Beacon, Phoenix — glowing brighter and moving livelier as it goes.",
+  },
+  {
+    n: "04",
+    title: "Miss a day? Grace.",
+    body: "Step away and the flame dims to a waiting ember instead of resetting to zero. It's consistency over the last 25 days, not fragile streaks. Return and it's whole again.",
+  },
+];
 
 // The stage showcase: one flame per stage, each in a distinct palette color,
 // grown enough to read as that stage.
@@ -163,6 +205,101 @@ export default function LandingPage() {
                 <span className="text-sm font-medium">{stage}</span>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive walkthrough — the Remotion "how it works" reel, playable. */}
+      <section className="relative z-10 border-t border-border px-5 py-16">
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-8 text-center">
+            <p className="text-sm uppercase tracking-widest text-text-muted">
+              See it in motion
+            </p>
+            <h2 className="mt-2 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+              How Ember works
+            </h2>
+            <p className="mx-auto mt-3 max-w-lg text-text-muted">
+              A one-minute walkthrough of the whole loop. Play it, or scrub to
+              any step — it&apos;s running live in your browser.
+            </p>
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+          >
+            <DemoPlayer />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* The four steps, spelled out. */}
+      <section className="relative z-10 border-t border-border bg-surface/40 px-5 py-16">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="text-center text-2xl font-semibold tracking-tight sm:text-3xl">
+            Four steps, then let it burn
+          </h2>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+            {STEPS.map((s, i) => (
+              <motion.div
+                key={s.n}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06, duration: 0.5 }}
+                className="rounded-2xl border border-border bg-canvas/60 p-6"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-sm text-ember">{s.n}</span>
+                  <h3 className="text-lg font-semibold">{s.title}</h3>
+                  {s.ai && <AiBadge />}
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-text-muted">
+                  {s.body}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Where the AI lives — make Gemini's role explicit and reassuring. */}
+      <section className="relative z-10 border-t border-border px-5 py-16">
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="flex justify-center">
+            <AiBadge label="Powered by Gemini" />
+          </div>
+          <h2 className="mt-4 text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
+            Where the AI comes in
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-text-muted">
+            Ember uses Google Gemini for two small, human moments: the three
+            questions it asks when you light a flame, and the personal check-in
+            it can offer when you log a day. It never scores or judges you — it
+            just helps you notice <em>why</em> a thing matters.
+          </p>
+          <p className="mx-auto mt-4 max-w-xl text-sm text-text-muted/80">
+            Every AI call runs on our server, never in your browser — your API
+            keys and your words stay private.
+          </p>
+          <div className="mt-8">
+            <Show when="signed-out">
+              <SignUpButton mode="modal" forceRedirectUrl="/dashboard">
+                <button className="rounded-xl bg-ember px-6 py-3 text-sm font-medium text-black transition hover:brightness-110">
+                  Light your first flame
+                </button>
+              </SignUpButton>
+            </Show>
+            <Show when="signed-in">
+              <Link
+                href="/dashboard"
+                className="rounded-xl bg-ember px-6 py-3 text-sm font-medium text-black transition hover:brightness-110"
+              >
+                Enter Ember →
+              </Link>
+            </Show>
           </div>
         </div>
       </section>

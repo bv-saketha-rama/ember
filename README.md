@@ -2,201 +2,93 @@
 
 # 🔥 Ember
 
-### Tend the things you're building. Watch them burn.
+### Tend the things you&apos;re building. Watch them burn.
 
-**Ember turns each passion into a living flame** — show up and it grows from a spark to a phoenix; step away and it dims. No streaks to shatter, no guilt. Just grace.
+Ember is a gentle passion tracker where every project, practice, or habit becomes a living flame. Show up and it grows from Spark to Phoenix. Miss a few days and it dims, but it never shames you or resets your progress.
 
-<img src="docs/flames/stages.svg" alt="The five flame stages: Spark, Flame, Blaze, Beacon, Phoenix" width="100%" />
+<a href="https://ember-two-sigma.vercel.app"><img src="https://raw.githubusercontent.com/bv-saketha-rama/ember/main/dev.to/assets/cover.png" alt="Ember — tend the things you're building" width="90%" /></a>
 
-**[🔴 Live demo → ember-two-sigma.vercel.app](https://ember-two-sigma.vercel.app)**
-
-<br/>
-
-<a href="https://ember-two-sigma.vercel.app"><img src="docs/demo/ember-walkthrough.gif" alt="Ember walkthrough — a flame growing from Spark to Phoenix, dimming with grace, and braiding with others" width="90%" /></a>
-
-<sub>▶️ <a href="docs/demo/ember-walkthrough.mp4">Watch the full-quality walkthrough (MP4)</a></sub>
-
-*Built for the [Weekend Challenge: Passion Edition](https://dev.to/challenges/weekend-2026-07-09).*
+**[Live demo → ember-two-sigma.vercel.app](https://ember-two-sigma.vercel.app)** · **[Hackathon post → dev.to](dev.to/blog.md)**
 
 </div>
 
----
+## Why Ember?
 
-## What is Ember?
+Most habit trackers are streak machines: miss one day and the number goes back to zero. Passions do not work that way. A missed Tuesday should not erase the work that came before it.
 
-Most habit trackers punish you: miss a day and your streak resets to zero. Ember rejects that. Every passion you're nurturing — writing, guitar, running, a side project — becomes a **flame** with its own color and origin story. You log a moment each day, and the flame *grows*. Life happens and you skip a few days? It dims into a soft ember and waits for you — it doesn't die.
+Ember measures consistency over a rolling 25-day window. Each passion has its own color, stage, origin story, and journal. The result is a calm dashboard that rewards returning instead of punishing absence.
 
-The result is a calm, living dashboard of the things that matter to you, and a gentle nudge to keep them alive.
+![The five Ember flame stages](docs/flames/stages.svg)
 
-## ✨ Features
+## Features
 
-- **🔥 Living flames** — each passion is an animated flame that visibly grows through five stages as you show up.
-- **🎨 A conversation, not a form** — new flames are born through a warm 3-question onboarding, phrased on the fly by **Google Gemini**, that captures *why* this matters to you.
-- **🌡️ Consistency over streaks** — progress is measured as "logged X of the last 25 days," so one missed day never wipes your effort.
-- **🕊️ Grace, not guilt** — miss two days and the flame dims to a warm ember; it only steps back a stage after a longer absence, and recovers the moment you return.
-- **🪢 Braided flames** — log more than one passion on the same day and the calendar shows their colors twisting together, celebrating a full day.
-- **🤖 AI check-ins** — an optional daily prompt from Gemini that references your stage and origin story — like a friend who remembers why you started.
-- **📅 Calendar & journal** — a month view of your flame-days and a searchable feed of every reflection you've written.
-- **🔒 Private by design** — the Gemini key never touches the browser; all AI runs server-side in Convex.
+- **Living flames:** five visible stages, from Spark to Phoenix.
+- **Consistency over streaks:** progress is based on distinct days tended in the last 25 days.
+- **Graceful decay:** a short gap dims a flame; returning revives it immediately.
+- **AI onboarding:** Gemini turns setup into three warm questions about the passion&apos;s “why.”
+- **AI check-ins:** optional daily prompts remember the flame&apos;s stage and origin story.
+- **Braided calendar:** multiple flames logged on one day twist together in a shared visual mark.
+- **Journal:** reflections, moods, AI answers, and milestones stay searchable.
+- **Private by design:** the Gemini key is used only in a server-side Convex action.
 
-## 🌱 The flame system
+## Flame mechanics
 
-Every flame moves through five stages, driven by the number of **distinct days** you've logged — not raw time.
+| Stage | Distinct days tended |
+|---|---:|
+| Spark | 0 |
+| Flame | 7 |
+| Blaze | 20 |
+| Beacon | 50 |
+| Phoenix | 100 |
 
-<div align="center">
-<table>
-<tr>
-<td align="center"><img src="docs/flames/spark.svg" width="80" /><br/><b>Spark</b><br/><sub>day 0</sub></td>
-<td align="center"><img src="docs/flames/flame.svg" width="80" /><br/><b>Flame</b><br/><sub>7 days</sub></td>
-<td align="center"><img src="docs/flames/blaze.svg" width="80" /><br/><b>Blaze</b><br/><sub>20 days</sub></td>
-<td align="center"><img src="docs/flames/beacon.svg" width="80" /><br/><b>Beacon</b><br/><sub>50 days</sub></td>
-<td align="center"><img src="docs/flames/phoenix.svg" width="80" /><br/><b>Phoenix</b><br/><sub>100 days</sub></td>
-</tr>
-</table>
-</div>
+The stage engine is a small pure module in [`convex/stages.ts`](convex/stages.ts), covered by unit tests. Grace and decay are computed from the last log on read, so returning to a passion restores its full stage without destructive writes.
 
-- **Growth is front-loaded** — big, visible gains early (Spark → Flame), then size flattens and the reward shifts to glow, faster flicker, extra tongues (Beacon), and ember particles.
-- **Consistency score** (`0–1`) = distinct days logged in the trailing 25-day window ÷ 25. It drives the flame's glow brightness.
-- **Grace & decay** are computed *live* on read, never stored destructively:
-  - `0–1 day` gap → **burning** 🔥
-  - `2–4 day` gap → **grace** (dims to a warm ember, keeps its stage) 🕯️
-  - `5+ day` gap → **decayed** (drops one stage visually, dims) — snaps back the instant you log again.
+## Showcase
 
-All of this lives in a tiny, fully unit-tested pure module (`convex/stages.ts`).
+![Flames growing from Spark to Phoenix](https://raw.githubusercontent.com/bv-saketha-rama/ember/main/dev.to/assets/flame-growth.png)
 
-## 🧱 Tech stack
+![A well-tended Ember dashboard](https://raw.githubusercontent.com/bv-saketha-rama/ember/main/dev.to/assets/dashboard-used.png)
 
-| Layer | Choice | Why |
-|---|---|---|
-| **Framework** | [Next.js 16](https://nextjs.org) (App Router, Turbopack) + React 19 | Modern RSC app, fast HMR |
-| **Backend / DB** | [Convex](https://convex.dev) | Reactive queries, serverless functions, live sync |
-| **Auth** | [Clerk](https://clerk.com) (Email + Google only) | Embedded in-app auth via `ConvexProviderWithClerk` |
-| **AI** | [Google Gemini](https://ai.google.dev) `gemini-2.5-flash` | Warm, on-brand copy — free tier, server-side only |
-| **Styling** | [Tailwind CSS v4](https://tailwindcss.com) (`@theme` in CSS) | Design tokens for the Ember palette |
-| **Motion** | [Motion](https://motion.dev) (Framer Motion) | The flames' flicker, glow, and growth springs |
-| **Testing** | [Vitest](https://vitest.dev) | 18 unit tests over the flame mechanics |
+![A calendar with braided flame-days](https://raw.githubusercontent.com/bv-saketha-rama/ember/main/dev.to/assets/calendar-braided.png)
 
-## 🏗️ How it works
+## Stack
 
-```
-Browser (Next.js / React)
-   │  useQuery / useMutation / useAction   (Convex React + Clerk JWT)
-   ▼
-Convex  ──────────────────────────────────────────────
-   ├─ queries/mutations   flames.ts · logs.ts   (per-user, Clerk-scoped)
-   ├─ pure mechanics       stages.ts             (stage · consistency · grace)
-   └─ "use node" action    ai.ts ──► Google Gemini API
-                                       ▲
-                     GEMINI_API_KEY  ──┘  (Convex env var — never sent to the client)
-```
+Next.js 16 · React 19 · Convex · Clerk · Google Gemini 2.5 Flash · Tailwind CSS v4 · Motion · Vitest · Remotion
 
-> **Security note.** The Gemini API key is held only as a Convex environment variable and is used exclusively inside a server-side Convex action (`convex/ai.ts`). It is **never** bundled into the browser. The client calls `useAction(api.ai.…)`, and Convex makes the outbound request.
-
-### Project structure
-
-```
-app/
-  page.tsx              Landing page (public) — hero flame + modal Clerk auth
-  dashboard/            "Ideas" — your grid of flames (protected)
-  calendar/             Month view with braided flame-days
-  journal/              Searchable reflection feed
-  sign-in · sign-up/    Embedded Clerk pages
-components/
-  flame/                Flame.tsx · BraidedFlame.tsx · flameShapes.ts (SVG art)
-  FlameCard · LogDialog · NewFlameDialog · Nav · MainShell · ...
-convex/
-  schema.ts             flames + logs tables
-  flames.ts · logs.ts   per-user queries & mutations
-  stages.ts             pure, tested flame mechanics
-  ai.ts                 "use node" Gemini action (onboarding + check-ins)
-  auth.config.ts        Clerk ↔ Convex JWT config
-lib/
-  palette.ts            design tokens + mechanics constants
-  dates.ts              local-tz day-key helpers
-tests/                  Vitest specs for dates + stages
-```
-
-## 🚀 Getting started
-
-### Prerequisites
-
-- **Node.js 18+**
-- Free accounts: [Convex](https://convex.dev), [Clerk](https://clerk.com), and a [Google AI Studio](https://aistudio.google.com/app/apikey) key.
-
-### 1. Install
+## Run locally
 
 ```bash
 git clone https://github.com/bv-saketha-rama/ember.git
 cd ember
 npm install
-```
-
-### 2. Configure environment
-
-```bash
 cp .env.example .env.local
+npx convex dev
+npm run dev
 ```
 
-Fill in your Clerk keys and Convex URLs in `.env.local`. See `.env.example` for the full annotated list.
+Configure Clerk, Convex, and Gemini values using `.env.example`. The Gemini key belongs in Convex, never in the browser.
 
-### 3. Set up Convex
-
-```bash
-npx convex dev        # creates your deployment, writes CONVEX_* vars, watches functions
-```
-
-Then set the two **server-side** secrets (these live in Convex, never in the browser):
-
-```bash
-npx convex env set CLERK_JWT_ISSUER_DOMAIN https://<your-subdomain>.clerk.accounts.dev
-npx convex env set GEMINI_API_KEY <your-gemini-key>
-```
-
-### 4. Configure Clerk
-
-- In the Clerk dashboard, enable **Email** and **Google** sign-in only (disable other providers).
-- Create a **JWT template named `convex`** with the claim `{ "aud": "convex" }`.
-
-### 5. Run
-
-```bash
-npm run dev           # in another terminal, alongside `npx convex dev`
-```
-
-Open **http://localhost:3000** and light your first flame. 🔥
-
-## 📜 Scripts
-
-| Command | What it does |
-|---|---|
-| `npm run dev` | Next.js dev server (Turbopack) |
-| `npm run build` | Production build |
-| `npm run start` | Serve the production build |
-| `npm run lint` | ESLint |
-| `npm run test` | Run the Vitest suite once |
-| `npm run test:watch` | Vitest in watch mode |
-| `npx convex dev` | Convex backend (run alongside `dev`) |
-
-## ✅ Testing
-
-The flame mechanics — stage thresholds, consistency scoring, grace/decay — are pure functions with **18 unit tests**:
+Useful commands:
 
 ```bash
 npm run test
+npm run lint
+npm run build
 ```
 
-## ☁️ Deployment
+## Project map
 
-1. **Convex** — `npx convex deploy` for a production deployment, and set `CLERK_JWT_ISSUER_DOMAIN` + `GEMINI_API_KEY` on it via `npx convex env set … --prod`.
-2. **Vercel** — import the repo and add every variable from `.env.example` (the `NEXT_PUBLIC_*` and `CLERK_SECRET_KEY` values) in the project settings. Point `NEXT_PUBLIC_CONVEX_URL` at your production Convex deployment.
-
-```bash
-vercel            # preview
-vercel --prod     # production
+```text
+app/                 Landing, dashboard, calendar, journal, auth routes
+components/          App shell, dialogs, flame rendering, landing walkthrough
+convex/               Schema, queries, mutations, stages, Gemini actions
+tests/                Dates and flame-mechanics tests
+remotion-demo/        Marketing walkthrough and Dev.to still compositions
+dev.to/               Submission post, template, and embeddable showcase assets
 ```
 
----
+## Submission
 
-<div align="center">
-<sub>🔥 <b>Ember</b> · tend your passions · built with Next.js, Convex, Clerk & Google Gemini</sub>
-</div>
+Built for the [Weekend Challenge: Passion Edition](https://dev.to/challenges/weekend-2026-07-09). Read the full submission in [`dev.to/blog.md`](dev.to/blog.md).
+
+<div align="center"><sub>🔥 Ember · tend your passions · built with Next.js, Convex, Clerk & Google Gemini</sub></div>

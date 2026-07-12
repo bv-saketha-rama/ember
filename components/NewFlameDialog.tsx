@@ -6,6 +6,7 @@ import { api } from "@/convex/_generated/api";
 import { FLAME_COLORS } from "@/lib/palette";
 import { Modal } from "./ui/Modal";
 import { Flame } from "./flame/Flame";
+import { AiBadge, AiThinking, AiShimmerLines } from "./ui/AiThinking";
 
 type QA = { question: string; answer: string };
 
@@ -91,6 +92,10 @@ export function NewFlameDialog({
             <p className="mt-1 text-sm text-text-muted">
               Name the thing you want to tend, and pick its color.
             </p>
+            <p className="mt-2 flex items-center gap-2 text-xs text-text-muted">
+              <AiBadge />
+              will ask you 3 quick questions to learn its story.
+            </p>
           </div>
           <input
             autoFocus
@@ -131,19 +136,25 @@ export function NewFlameDialog({
         </div>
       ) : (
         <div className="space-y-5">
-          <div className="flex items-center gap-3">
+          <div className="flex items-start gap-3">
             <Flame color={color} stage="Spark" size={56} daysLogged={0} />
-            <div>
-              <p className="text-xs uppercase tracking-wide text-text-muted">
-                {name} · question {step + 1} of 3
-              </p>
-              <p className="mt-1 min-h-[2.5rem] font-medium leading-snug">
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <AiBadge />
+                <span className="text-xs uppercase tracking-wide text-text-muted">
+                  {name} · question {step + 1} of 3
+                </span>
+              </div>
+              <div className="mt-2 min-h-[2.75rem] font-medium leading-snug">
                 {loadingQ ? (
-                  <span className="text-text-muted">thinking…</span>
+                  <div className="space-y-2 py-0.5">
+                    <AiThinking label="Ember is writing your question" />
+                    <AiShimmerLines lines={2} />
+                  </div>
                 ) : (
                   question
                 )}
-              </p>
+              </div>
             </div>
           </div>
           <textarea
@@ -160,7 +171,7 @@ export function NewFlameDialog({
             </button>
             <button
               onClick={submitAnswer}
-              disabled={saving}
+              disabled={saving || loadingQ}
               className="rounded-xl bg-ember px-5 py-2 text-sm font-medium text-black disabled:opacity-50"
             >
               {saving ? "Lighting…" : step < 2 ? "Next" : "Light it"}

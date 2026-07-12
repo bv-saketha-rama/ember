@@ -7,7 +7,13 @@
     "render": "remotion render src/index.ts Walkthrough out/ember-walkthrough.mp4 --codec=h264",
     "gif": "remotion render src/index.ts Walkthrough out/ember-walkthrough.gif --codec=gif --every-nth-frame=2 --width=960",
     "still": "remotion still src/index.ts Walkthrough out/poster.png --frame=210",
-    "studio": "remotion studio src/index.ts"
+    "studio": "remotion studio src/index.ts",
+    "devto:stills": "npm run devto:cover && npm run devto:growth && npm run devto:dashboard && npm run devto:calendar && npm run devto:journal",
+    "devto:cover": "remotion still src/index.ts DevtoCover ../dev.to/assets/cover.png --frame=0",
+    "devto:growth": "remotion still src/index.ts DevtoGrowth ../dev.to/assets/flame-growth.png --frame=0",
+    "devto:dashboard": "remotion still src/index.ts DevtoDashboard ../dev.to/assets/dashboard-used.png --frame=0",
+    "devto:calendar": "remotion still src/index.ts DevtoCalendar ../dev.to/assets/calendar-braided.png --frame=0",
+    "devto:journal": "remotion still src/index.ts DevtoJournal ../dev.to/assets/journal-checkins.png --frame=0"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.0",

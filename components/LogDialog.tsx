@@ -8,6 +8,7 @@ import { motion } from "motion/react";
 import { MOODS, type Mood } from "@/lib/palette";
 import { dayKey } from "@/lib/dates";
 import { Modal } from "./ui/Modal";
+import { AiBadge, AiThinking, AiShimmerLines } from "./ui/AiThinking";
 
 export function LogDialog({
   flameId,
@@ -133,9 +134,9 @@ export function LogDialog({
 
         {/* Optional AI enrichment — never a gate. */}
         {checkin ? (
-          <div className="rounded-xl border border-border bg-surface-raised/60 p-3">
-            <p className="text-sm font-medium text-ember">Ember asks</p>
-            <p className="mt-1 text-sm">{checkin}</p>
+          <div className="rounded-xl border border-ember/40 bg-ember/5 p-3">
+            <AiBadge />
+            <p className="mt-2 text-sm">{checkin}</p>
             <textarea
               value={aiAnswer}
               onChange={(e) => setAiAnswer(e.target.value)}
@@ -144,13 +145,22 @@ export function LogDialog({
               className="mt-2 w-full resize-none rounded-lg border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-ember"
             />
           </div>
+        ) : loadingCheckin ? (
+          <div className="rounded-xl border border-ember/40 bg-ember/5 p-3">
+            <AiThinking label="Ember is writing a check-in for you" />
+            <div className="mt-2">
+              <AiShimmerLines lines={2} />
+            </div>
+          </div>
         ) : (
           <button
             onClick={loadCheckin}
-            disabled={loadingCheckin}
-            className="text-sm text-text-muted underline decoration-dotted underline-offset-4 hover:text-text"
+            className="group flex w-full items-center gap-2 rounded-xl border border-dashed border-ember/40 bg-ember/5 px-3 py-2.5 text-left text-sm text-text transition hover:border-ember hover:bg-ember/10"
           >
-            {loadingCheckin ? "asking Ember…" : "Get a check-in question from Ember"}
+            <AiBadge />
+            <span className="text-text-muted group-hover:text-text">
+              Get a personal check-in question →
+            </span>
           </button>
         )}
 
