@@ -52,7 +52,15 @@ export const Flame: React.FC<FlameProps> = ({
   const dimF = 1 - dim * 0.75;
   const s = v.baseScale * scale;
 
-  const tongues = stage === "Beacon" ? [-14, 0, 14] : [0];
+  // Beacon: a dominant central flame flanked by two small tongues at the base.
+  const tongues =
+    stage === "Beacon"
+      ? [
+          { dx: -27, s: 0.52 },
+          { dx: 27, s: 0.52 },
+          { dx: 0, s: 1 },
+        ]
+      : [{ dx: 0, s: 1 }];
 
   return (
     <svg
@@ -94,17 +102,22 @@ export const Flame: React.FC<FlameProps> = ({
         {stage === "Phoenix" ? (
           <>
             <path d={PHOENIX_BIRD} fill={`url(#grad-${uid})`} />
-            <path d={PHOENIX_BIRD} fill={lighten(color, 60)} opacity={0.35} transform="scale(0.7) translate(21 30)" />
+            <path
+              d={PHOENIX_BIRD}
+              fill={lighten(color, 60)}
+              opacity={0.35}
+              transform="translate(50 84) scale(0.58) translate(-50 -84)"
+            />
           </>
         ) : (
           <>
-            {tongues.map((dx, i) => (
+            {tongues.map(({ dx, s: ts }, i) => (
               <path
                 key={i}
                 d={TEARDROP}
                 fill={`url(#grad-${uid})`}
-                opacity={i === 1 || tongues.length === 1 ? 1 : 0.85}
-                transform={`translate(${dx} ${i === 1 || tongues.length === 1 ? 0 : 10}) scale(${i === 1 || tongues.length === 1 ? 1 : 0.72}) translate(${dx === 0 ? 0 : (dx < 0 ? 19 : -19)} ${i === 1 || tongues.length === 1 ? 0 : 20})`}
+                opacity={ts === 1 ? 1 : 0.95}
+                transform={`translate(${50 + dx} 128) scale(${ts}) translate(-50 -128)`}
               />
             ))}
             <path d={TEARDROP_CORE} fill={lighten(color, 110)} opacity={0.9 * dimF} />

@@ -39,7 +39,7 @@ export const STAGE_VISUALS: Record<Stage, StageVisual> = {
   Flame: { baseScale: 0.95, glow: 1.0, tongues: 1, particles: false },
   Blaze: { baseScale: 1.18, glow: 1.4, tongues: 1, particles: true },
   Beacon: { baseScale: 1.32, glow: 1.8, tongues: 3, particles: true },
-  Phoenix: { baseScale: 1.46, glow: 2.4, tongues: 1, particles: true },
+  Phoenix: { baseScale: 1.12, glow: 2.4, tongues: 1, particles: true },
 };
 
 export const TEARDROP =
@@ -47,7 +47,7 @@ export const TEARDROP =
 export const TEARDROP_CORE =
   "M50 40 C 62 62, 71 74, 71 95 C 71 115, 62 123, 50 123 C 38 123, 29 115, 29 95 C 29 74, 38 62, 50 40 Z";
 export const PHOENIX_BIRD =
-  "M50 8 C 54 26, 58 34, 66 40 C 82 30, 96 34, 100 44 C 88 48, 78 56, 72 68 C 84 72, 92 82, 92 92 C 80 86, 68 88, 60 96 C 62 112, 56 126, 50 134 C 44 126, 38 112, 40 96 C 32 88, 20 86, 8 92 C 8 82, 16 72, 28 68 C 22 56, 12 48, 0 44 C 4 34, 18 30, 34 40 C 42 34, 46 26, 50 8 Z";
+  "M50 6 C 53 20, 54 30, 57 40 C 68 26, 84 20, 96 22 C 86 34, 76 44, 68 56 C 64 74, 61 86, 60 96 C 66 106, 70 114, 70 120 C 62 118, 55 120, 50 134 C 45 120, 38 118, 30 120 C 30 114, 34 106, 40 96 C 39 86, 36 74, 32 56 C 24 44, 14 34, 4 22 C 16 20, 32 26, 43 40 C 46 30, 47 20, 50 6 Z";
 
 export function displayColor(baseHex: string, stage: Stage): string {
   return stage === "Phoenix" ? PHOENIX_GOLD : baseHex;

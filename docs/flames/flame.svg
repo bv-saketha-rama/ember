@@ -12,7 +12,7 @@
     <linearGradient id="core-flame" x1="0" y1="1" x2="0" y2="0">
       <stop offset="0%" stop-color="rgb(186, 213, 255)" stop-opacity="0.6"/>
       <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.9"/>
-    </linearGradient></defs><ellipse cx="60" cy="95" rx="58" ry="64" fill="url(#glow-flame)"/><g transform="translate(10 6) scale(1)">
+    </linearGradient></defs><ellipse cx="60" cy="95" rx="58" ry="64" fill="url(#glow-flame)"/><g transform="translate(10 6)">
        <g transform="translate(50 128) scale(0.9) translate(-50 -128)"><path d="M50 6 C 69 38, 88 60, 88 90 C 88 118, 71 134, 50 134 C 29 134, 12 118, 12 90 C 12 60, 31 38, 50 6 Z" fill="url(#body-flame)"/>
             <path d="M50 40 C 62 62, 71 74, 71 95 C 71 115, 62 123, 50 123 C 38 123, 29 115, 29 95 C 29 74, 38 62, 50 40 Z" fill="url(#core-flame)" opacity="0.85"/></g>
      </g>

@@ -61,13 +61,15 @@ export function Flame({
     ease: "easeInOut" as const,
   };
 
-  // Which flame tongues to draw (Beacon splits into three).
+  // Which flame tongues to draw (Beacon splits into three). The side tongues
+  // are small and flank the base so the central flame stays dominant — reads
+  // as a beacon rather than a lumpy triple-blob.
   const tongues = useMemo(() => {
     if (isPhoenix(stage)) return [{ dx: 0, s: 1, phase: 0 }];
     if (v.tongues === 3)
       return [
-        { dx: -16, s: 0.72, phase: 0.25 },
-        { dx: 16, s: 0.72, phase: 0.5 },
+        { dx: -27, s: 0.52, phase: 0.25 },
+        { dx: 27, s: 0.52, phase: 0.5 },
         { dx: 0, s: 1, phase: 0 },
       ];
     return [{ dx: 0, s: 1, phase: 0 }];
@@ -112,7 +114,7 @@ export function Flame({
         {isPhoenix(stage) ? (
           <motion.g animate={flicker} transition={flickerT}>
             <path d={PHOENIX_BIRD} fill={`url(#body-${uid})`} />
-            <path d={PHOENIX_BIRD} fill={`url(#core-${uid})`} transform="scale(0.55) translate(41 48)" opacity={0.5} />
+            <path d={PHOENIX_BIRD} fill={`url(#core-${uid})`} transform="translate(50 84) scale(0.58) translate(-50 -84)" opacity={0.42} />
           </motion.g>
         ) : (
           tongues.map((t, i) => (
@@ -129,7 +131,7 @@ export function Flame({
                   : {}
               }
               transition={{ ...flickerT, delay: t.phase * v.flickerSpeed }}
-              transform={`translate(${t.dx} ${(1 - t.s) * 40}) scale(${t.s})`}
+              transform={`translate(${50 + t.dx} 128) scale(${t.s}) translate(-50 -128)`}
             >
               <path d={TEARDROP} fill={`url(#body-${uid})`} />
               <path d={TEARDROP_CORE} fill={`url(#core-${uid})`} opacity={0.85} />
