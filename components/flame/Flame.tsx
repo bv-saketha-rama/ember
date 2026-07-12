@@ -68,8 +68,8 @@ export function Flame({
     if (isPhoenix(stage)) return [{ dx: 0, s: 1, phase: 0 }];
     if (v.tongues === 3)
       return [
-        { dx: -27, s: 0.52, phase: 0.25 },
-        { dx: 27, s: 0.52, phase: 0.5 },
+        { dx: -22, s: 0.40, phase: 0.25 },
+        { dx: 22, s: 0.40, phase: 0.5 },
         { dx: 0, s: 1, phase: 0 },
       ];
     return [{ dx: 0, s: 1, phase: 0 }];

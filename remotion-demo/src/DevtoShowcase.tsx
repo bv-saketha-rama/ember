@@ -64,14 +64,35 @@ export const DevtoDashboard: React.FC = () => (
 
 export const DevtoCalendar: React.FC = () => {
   const colors = [COLORS.ember, COLORS.sapphire, COLORS.violet, COLORS.emerald, COLORS.crimson];
+  const marks = [1, 2, 3, 1, 2, 4, 3, 2, 0, 1, 3, 2, 4, 1, 0, 2, 3, 1, 2, 4, 0, 3, 2, 1, 4, 2, 3, 1, 2, 4, 1, 3, 2, 1, 3];
   return <Shell title="Calendar" subtitle="A month of showing up, seen at a glance.">
     <div style={{ marginTop: 24, padding: 26, borderRadius: 22, border: "1px solid #2a2433", background: "rgba(23,20,28,.88)" }}>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 12 }}>
-        {["S", "M", "T", "W", "T", "F", "S", ...Array.from({ length: 35 }, (_, i) => i + 1)].map((value, i) => <div key={i} style={{ height: i < 7 ? 24 : 66, borderRadius: 12, border: i < 7 ? "none" : "1px solid #2a2433", color: i < 7 ? FAINT : TEXT, padding: i < 7 ? 0 : 8, fontSize: 14, textAlign: i < 7 ? "center" : "left" }}>{value}{i >= 7 && i % 3 !== 0 ? <div style={{ display: "flex", justifyContent: "center", marginTop: 2 }}><div style={{ display: "flex", gap: 2 }}>{colors.slice(0, (i % 5) + 1).map((c, j) => <span key={j} style={{ width: 7, height: 18, borderRadius: 8, background: c, transform: `rotate(${j * 16 - 20}deg)` }} />)}</div></div> : null}</div>)}
+        {["S", "M", "T", "W", "T", "F", "S", ...Array.from({ length: 35 }, (_, i) => i + 1)].map((value, i) => <div key={i} style={{ height: i < 7 ? 24 : 76, borderRadius: 12, border: i < 7 ? "none" : "1px solid #2a2433", color: i < 7 ? FAINT : TEXT, padding: i < 7 ? 0 : 8, fontSize: 14, textAlign: i < 7 ? "center" : "left" }}>{value}{i >= 7 && marks[i - 7] > 0 ? <div style={{ display: "flex", justifyContent: "center", alignItems: "end", height: 48, marginTop: -2 }}>{colors.slice(0, marks[i - 7]).map((c, j) => <div key={j} style={{ marginLeft: j === 0 ? 0 : -10, zIndex: j, transform: `translateY(${j % 2 ? 3 : 0}px)` }}><Flame stage={j === 0 ? "Flame" : "Spark"} baseColor={c} size={30} seed={i + j} /></div>)}</div> : <div style={{ display: "flex", justifyContent: "center", marginTop: 26, color: "#30293a" }}>•</div>}</div>)}
       </div>
     </div>
   </Shell>;
 };
+
+export const DevtoAiJournal: React.FC = () => (
+  <AbsoluteFill style={{ background: `radial-gradient(100% 90% at 50% 20%, #251a2b 0%, ${CANVAS} 70%)`, alignItems: "center", justifyContent: "center", color: TEXT, fontFamily: SANS }}>
+    <div style={{ width: 650, border: "1px solid #2a2433", background: "rgba(23,20,28,.96)", borderRadius: 24, padding: 30, boxShadow: "0 28px 80px rgba(0,0,0,.5)" }}>
+      <div style={{ fontFamily: SERIF, fontSize: 30, fontWeight: 700 }}>How was Running today?</div>
+      <div style={{ color: MUTED, fontSize: 17, marginTop: 6 }}>A tap is enough. Say more only if you feel like it.</div>
+      <div style={{ display: "flex", gap: 12, marginTop: 24 }}>
+        {[{ glyph: "🔥", label: "Energized" }, { glyph: "🙂", label: "Okay" }, { glyph: "🌧️", label: "Rough" }].map((m, i) => <div key={m.label} style={{ flex: 1, border: `1px solid ${i === 0 ? COLORS.ember : "#2a2433"}`, background: i === 0 ? "rgba(255,107,53,.08)" : "transparent", borderRadius: 14, textAlign: "center", padding: "14px 6px" }}><div style={{ fontSize: 30 }}>{m.glyph}</div><div style={{ color: MUTED, fontSize: 14, marginTop: 4 }}>{m.label}</div></div>)}
+      </div>
+      <div style={{ marginTop: 20, border: "1px solid rgba(255,107,53,.5)", background: "rgba(255,107,53,.07)", borderRadius: 15, padding: 18 }}>
+        <div style={{ color: COLORS.ember, fontSize: 14, fontWeight: 700, letterSpacing: 1 }}>✦ EMBER AI</div>
+        <div style={{ fontFamily: SERIF, fontSize: 25, marginTop: 12 }}>What pulled you to the run today?</div>
+        <div style={{ color: FAINT, fontSize: 15, marginTop: 8 }}>Optional — answer only if you feel like it.</div>
+        <div style={{ marginTop: 14, border: "1px solid #2a2433", borderRadius: 10, padding: 13, color: FAINT }}>I wanted to clear my head before the day started…</div>
+      </div>
+      <div style={{ marginTop: 18, border: "1px solid #2a2433", borderRadius: 12, padding: 15, color: FAINT }}>Anything you want to remember about today…</div>
+      <div style={{ textAlign: "right", marginTop: 18, color: COLORS.ember, fontWeight: 600 }}>Log it →</div>
+    </div>
+  </AbsoluteFill>
+);
 
 export const DevtoJournal: React.FC = () => (
   <Shell title="Journal" subtitle="Everything you&apos;ve tended, looking back.">
@@ -87,4 +108,5 @@ export const DevtoShowcaseCompositions: React.FC = () => <>
   <Composition id="DevtoDashboard" component={DevtoDashboard} durationInFrames={1} fps={30} width={1600} height={1000} />
   <Composition id="DevtoCalendar" component={DevtoCalendar} durationInFrames={1} fps={30} width={1600} height={1000} />
   <Composition id="DevtoJournal" component={DevtoJournal} durationInFrames={1} fps={30} width={1600} height={1000} />
+  <Composition id="DevtoAiJournal" component={DevtoAiJournal} durationInFrames={1} fps={30} width={1600} height={1000} />
 </>;

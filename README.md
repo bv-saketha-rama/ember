@@ -2,7 +2,7 @@
 
 # 🔥 Ember
 
-### Tend the things you&apos;re building. Watch them burn.
+### Tend the things you're building. Watch them burn.
 
 Ember is a gentle passion tracker where every project, practice, or habit becomes a living flame. Show up and it grows from Spark to Phoenix. Miss a few days and it dims, but it never shames you or resets your progress.
 
@@ -25,8 +25,8 @@ Ember measures consistency over a rolling 25-day window. Each passion has its ow
 - **Living flames:** five visible stages, from Spark to Phoenix.
 - **Consistency over streaks:** progress is based on distinct days tended in the last 25 days.
 - **Graceful decay:** a short gap dims a flame; returning revives it immediately.
-- **AI onboarding:** Gemini turns setup into three warm questions about the passion&apos;s “why.”
-- **AI check-ins:** optional daily prompts remember the flame&apos;s stage and origin story.
+- **AI onboarding:** Gemini turns setup into three warm questions about the passion's “why.”
+- **AI check-ins:** optional daily prompts remember the flame's stage and origin story.
 - **Braided calendar:** multiple flames logged on one day twist together in a shared visual mark.
 - **Journal:** reflections, moods, AI answers, and milestones stay searchable.
 - **Private by design:** the Gemini key is used only in a server-side Convex action.
@@ -50,6 +50,8 @@ The stage engine is a small pure module in [`convex/stages.ts`](convex/stages.ts
 ![A well-tended Ember dashboard](https://raw.githubusercontent.com/bv-saketha-rama/ember/main/dev.to/assets/dashboard-used.png)
 
 ![A calendar with braided flame-days](https://raw.githubusercontent.com/bv-saketha-rama/ember/main/dev.to/assets/calendar-braided.png)
+
+![An Ember AI journaling check-in](https://raw.githubusercontent.com/bv-saketha-rama/ember/main/dev.to/assets/ai-journal-checkin.png)
 
 ## Stack
 

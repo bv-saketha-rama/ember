@@ -1,4 +1,4 @@
-# Ember — tend the things you&apos;re building, and watch them burn 🔥
+# Ember — tend the things you're building, and watch them burn 🔥
 
 > This is a submission for the [Weekend Challenge: Passion Edition](https://dev.to/challenges/weekend-2026-07-09).
 

@@ -56,8 +56,8 @@ export const Flame: React.FC<FlameProps> = ({
   const tongues =
     stage === "Beacon"
       ? [
-          { dx: -27, s: 0.52 },
-          { dx: 27, s: 0.52 },
+          { dx: -22, s: 0.40 },
+          { dx: 22, s: 0.40 },
           { dx: 0, s: 1 },
         ]
       : [{ dx: 0, s: 1 }];

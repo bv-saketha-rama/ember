@@ -1,20 +1,89 @@
 *This is a submission for the [Weekend Challenge: Passion Edition](https://dev.to/challenges/weekend-2026-07-09)*
 
-# Ember — tend the things you&apos;re building, and watch them burn 🔥
+# Ember: tend the things you're building, and watch them burn
 
-![Ember cover — a phoenix flame on a dark canvas](https://raw.githubusercontent.com/bv-saketha-rama/ember/main/dev.to/assets/cover.png)
+![Ember cover - a phoenix flame on a dark canvas](https://raw.githubusercontent.com/bv-saketha-rama/ember/main/dev.to/assets/cover.png)
 
 ## What I Built
 
-**[Ember](https://github.com/bv-saketha-rama/ember)** is a passion tracker built around one idea: showing up should feel encouraging, even when life gets messy.
+**[Ember](https://github.com/bv-saketha-rama/ember)** is a passion tracker for the things people want to keep alive: writing, running, music, learning, or a side project.
 
-Habit trackers often make a missed day feel like failure. Ember treats a passion more like a fire. Every project, practice, or habit gets its own flame, color, and origin story. Tend it and it grows from **Spark** to **Flame**, **Blaze**, **Beacon**, and finally **Phoenix**.
+The idea came from a frustration with traditional habit trackers. A missed day can turn a useful tool into a guilt machine: the streak breaks, the counter goes back to zero, and the work that came before it feels invisible.
+
+Ember uses a different metaphor. Every passion becomes a living flame. You give it a name, a color, and a reason for existing. When you show up, it grows through five stages:
 
 ![The five Ember flame stages](https://raw.githubusercontent.com/bv-saketha-rama/ember/main/docs/flames/stages.svg)
 
-The important twist is what happens when you miss a day. Ember measures consistency across the last 25 days instead of storing a brittle streak. A short gap dims the flame into a warm ember; a longer absence visually steps it back one stage. Log again and it returns immediately. No guilt, no reset — just a reason to come back.
+**Spark -> Flame -> Blaze -> Beacon -> Phoenix**
+
+The goal is not to be perfect. The goal is to make returning feel worthwhile.
+
+## The core features
+
+### 1. Flames that visibly grow
+
+Every flame is driven by distinct days tended, not by raw clicks or a fragile streak counter:
+
+- Flame at 7 distinct days
+- Blaze at 20 days
+- Beacon at 50 days
+- Phoenix at 100 days
+
+Each stage has its own visual language: scale, glow, flicker, extra tongues, ember particles, and eventually a phoenix silhouette.
 
 ![Flames growing from Spark to Phoenix](https://raw.githubusercontent.com/bv-saketha-rama/ember/main/dev.to/assets/flame-growth.png)
+
+### 2. Consistency instead of streaks
+
+Ember measures how many distinct days were tended in the trailing 25-day window. That means one missed day does not erase the previous month of effort.
+
+The flame also has a live life state:
+
+- **Burning:** recently tended and fully bright.
+- **Grace:** a short absence dims the flame but keeps its stage.
+- **Decayed:** a longer absence lowers the visual stage temporarily.
+
+The underlying progress is never destructively reset. The moment you log again, the flame comes back.
+
+### 3. A calendar that shows a full life
+
+The calendar makes consistency visible without turning it into a leaderboard. A day can show one flame, or several flames braided together when multiple passions were tended on the same date.
+
+![A calendar with real flame silhouettes and braided activity](https://raw.githubusercontent.com/bv-saketha-rama/ember/main/dev.to/assets/calendar-braided.png)
+
+### 4. A journal that remembers the work
+
+Logging a day can be as quick as choosing a mood. If you want to say more, Ember also stores an optional reflection and any AI check-in answer.
+
+The journal then becomes a quiet record of what actually happened: the small wins, the rough days, the milestones, and the reasons you kept going.
+
+![Journal entries from several passions](https://raw.githubusercontent.com/bv-saketha-rama/ember/main/dev.to/assets/journal-checkins.png)
+
+## How the AI is useful
+
+The AI is not a generic chatbot bolted onto the side of the app. It has two focused jobs: help a new flame discover its reason, and make daily reflection easier.
+
+### AI onboarding: turning setup into a conversation
+
+When a user creates a flame, Ember asks three questions about its origin story. Gemini rewrites each question using:
+
+- The name of the flame.
+- The user's previous answers.
+- A specific conversational intent for that step: why they started, what the passion could mean in their life, and what “good enough” success would feel like.
+
+That makes the setup feel less like filling out metadata and more like explaining something meaningful to a supportive friend.
+
+### AI check-ins: a gentle prompt for today
+
+When logging a day, the user can ask Ember for a personal check-in. Gemini receives the flame's name, current stage, number of tended days, and original answers. It then asks one short question that connects today's effort back to the reason the flame was lit.
+
+![Ember AI asks a gentle journaling check-in](https://raw.githubusercontent.com/bv-saketha-rama/ember/main/dev.to/assets/ai-journal-checkin.png)
+
+The AI prompt is deliberately optional. A mood tap is always enough, and the journal field is always available without answering the AI question. The feature adds reflection when it is useful; it never becomes another obligation.
+
+### Responsible integration
+
+Gemini runs through a server-side Convex action. The API key is stored as a Convex environment variable and never reaches the browser. If the key is missing or the request fails, Ember falls back to concise handwritten questions, so the core experience still works.
 
 ## Demo
 
@@ -22,54 +91,38 @@ The important twist is what happens when you miss a day. Ember measures consiste
 
 {% embed https://github.com/bv-saketha-rama/ember %}
 
-The core flow is deliberately small:
+The main flow is:
 
-1. Name a passion and choose its color.
-2. Answer three short, Gemini-phrased questions about why it matters.
-3. Log a mood and an optional reflection whenever you show up.
-4. Watch the flame grow, review the calendar, and revisit the journal.
+1. Sign in and create a flame.
+2. Choose its color and answer three questions about its story.
+3. Log a mood, optional AI answer, and optional journal entry.
+4. Watch the flame grow and celebrate stage milestones.
+5. Review the calendar and journal whenever you want to look back.
 
 ![A well-tended Ember dashboard](https://raw.githubusercontent.com/bv-saketha-rama/ember/main/dev.to/assets/dashboard-used.png)
-
-![A calendar with braided flame-days](https://raw.githubusercontent.com/bv-saketha-rama/ember/main/dev.to/assets/calendar-braided.png)
-
-![Journal entries with optional AI check-ins](https://raw.githubusercontent.com/bv-saketha-rama/ember/main/dev.to/assets/journal-checkins.png)
-
-## Code
-
-The project is open source: [github.com/bv-saketha-rama/ember](https://github.com/bv-saketha-rama/ember).
-
-- [`convex/stages.ts`](https://github.com/bv-saketha-rama/ember/blob/main/convex/stages.ts) contains the pure stage, consistency, grace, and decay mechanics.
-- [`convex/ai.ts`](https://github.com/bv-saketha-rama/ember/blob/main/convex/ai.ts) keeps Gemini calls server-side.
-- [`components/flame/Flame.tsx`](https://github.com/bv-saketha-rama/ember/blob/main/components/flame/Flame.tsx) renders the stage-aware animated SVG flame.
-- [`components/flame/BraidedFlame.tsx`](https://github.com/bv-saketha-rama/ember/blob/main/components/flame/BraidedFlame.tsx) visualizes several passions tended on one day.
 
 ## How I Built It
 
 **Stack:** Next.js 16, React 19, Convex, Clerk, Google Gemini 2.5 Flash, Tailwind CSS v4, Motion, Vitest, and Remotion.
 
-### The mechanics came first
+### Mechanics first
 
-All flame behavior lives in a dependency-free module. Distinct logged days determine the stage; a rolling 25-day window determines consistency; the gap since the last log determines whether a flame is burning, in grace, or decayed. These values are computed live, so the database never needs a destructive “reset streak” mutation. The mechanics are covered by 18 Vitest tests.
+The flame behavior lives in a small pure module, [`convex/stages.ts`](https://github.com/bv-saketha-rama/ember/blob/main/convex/stages.ts). It calculates stage thresholds, the rolling consistency score, grace, decay, and the effective visual stage. Because those rules are pure, they are covered by 18 unit tests and can be reasoned about independently from the UI.
 
 ### The flame is the interface
 
-Each stage has its own scale, glow, flicker, tongues, and particle behavior. A single Motion-powered SVG component renders those visual states. Beacon grows multiple tongues, Phoenix becomes a golden bird, and grace/decay lower the glow without erasing the underlying work.
+[`components/flame/Flame.tsx`](https://github.com/bv-saketha-rama/ember/blob/main/components/flame/Flame.tsx) is a stage-aware animated SVG component driven by Motion. Beacon uses a dominant central flame with narrower side tongues, while Phoenix switches to a firebird silhouette. [`BraidedFlame.tsx`](https://github.com/bv-saketha-rama/ember/blob/main/components/flame/BraidedFlame.tsx) keeps multiple colors visually separate when several passions share a day.
 
-### Gemini makes setup feel human
+### Reactive backend and private AI
 
-Creating a flame is a short conversation rather than a form. A Convex server-side action asks Gemini for one warm question at a time, using the flame name and previous answers as context. The daily check-in uses the same pattern. The API key stays in Convex, never in the browser, and handwritten fallback questions keep the flow usable when Gemini is unavailable.
-
-### Several passions can share a day
-
-The calendar uses braided colors when multiple flames are logged on the same date. That makes a full day visible without turning the experience into a leaderboard or streak counter.
+Convex provides reactive queries and mutations for flames and logs. Clerk scopes the data to the signed-in user. Gemini is called only from [`convex/ai.ts`](https://github.com/bv-saketha-rama/ember/blob/main/convex/ai.ts), which keeps the secret off the client and gives the UI a predictable fallback path.
 
 ## Prize Categories
 
 ### Best Use of Google AI
 
-Gemini powers Ember&apos;s onboarding conversation and optional daily check-ins. It is integrated through Convex actions, with server-side secrets and graceful fallbacks. The AI does not replace the product&apos;s mechanics; it gives the mechanics a warmer voice and helps each flame remember why it exists.
+Ember uses Google Gemini 2.5 Flash in a focused, human-centered way. It turns flame creation into a contextual three-question conversation and offers optional daily prompts that remember the user's original motivation. The AI adds warmth and continuity while leaving the user in control of what they share.
 
 ## Try it
 
-If you have something you&apos;re trying to keep alive — writing, running, music, a side project — [light a flame](https://ember-two-sigma.vercel.app) and see what happens when progress is allowed to be forgiving.
+If you have something you're trying to keep alive - a project, practice, or personal goal - [light a flame](https://ember-two-sigma.vercel.app) and see what progress feels like when it is allowed to be forgiving.
